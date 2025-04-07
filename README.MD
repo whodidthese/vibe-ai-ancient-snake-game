@@ -1,6 +1,6 @@
 # Vibe AI Ancient Snake Game #
 
-[![License: ISC](about:sanitized)](https://opensource.org/licenses/ISC)
+[![License: ISC](https://opensource.org/licenses/ISC)
 
 An "ancient"-themed, mobile-friendly implementation of the classic Snake game featuring a parchment aesthetic, automatic nickname generation, and an online leaderboard system.
 
@@ -30,7 +30,9 @@ An "ancient"-themed, mobile-friendly implementation of the classic Snake game fe
   * **Database:**
       * SQLite
 
-## Screenshot
+## Demo & Screenshots
+
+Play Demo: [Vibe AI Ancient Snake Game](https://ai-ancient-snake.talkingsource.com/)
 
 ![Game Play](./doc/screenshot_250407.jpg)
 

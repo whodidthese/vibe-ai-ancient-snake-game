@@ -22,28 +22,6 @@ body {
 	/* Improve touch responsiveness */
 }
 
-/* Desktop Orientation Blocker */
-#desktop-blocker {
-	display: none;
-	/* Hidden by default */
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(80, 50, 30, 0.9);
-	/* Dark overlay */
-	color: #f5eeda;
-	/* Light text */
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	font-size: 1.5em;
-	z-index: 100;
-	padding: 20px;
-}
-
 /* Game Container - Vertical Focus */
 #game-container {
 	display: flex;
@@ -533,30 +511,6 @@ body {
 }
 
 /* --- Responsive Adjustments & Desktop Blocker Logic --- */
-
-/* Apply desktop blocker on wider screens OR landscape orientation */
-@media (min-width: 600px),
-(orientation: landscape) {
-	/* Show blocker only if it's NOT a typical portrait mobile */
-	@media (min-aspect-ratio: 1/1) {
-
-		/* If width > height */
-		#desktop-blocker {
-			display: flex;
-			/* Show the blocker */
-		}
-
-		#game-container {
-			display: none;
-			/* Hide the game */
-		}
-	}
-
-	/* Ensure game container is still centered if aspect ratio is somehow vertical but wide */
-	body {
-		align-items: center;
-	}
-}
 
 /* On very narrow screens, reduce padding/fonts slightly */
 @media (max-width: 320px) {

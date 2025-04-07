@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Ancient Serpent</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div id="desktop-blocker">
+		<p>Please resize your browser window to a vertical orientation or use a mobile device to play.</p>
+	</div>
+
+	<div id="game-container">
+		<header id="info-bar">
+			<div>Score: <span id="score">0</span></div>
+			<div>Local High: <span id="local-high-score">0</span></div>
+		</header>
+		<div id="nickname-display">Player: <span id="nickname">Loading...</span></div>
+
+		<canvas id="game-canvas"></canvas>
+
+		<div id="start-screen" class="overlay">
+			<h1>Ancient Serpent</h1>
+			<button id="start-button">Start Game</button>
+		</div>
+
+		<div id="countdown-overlay" class="overlay">
+			<span id="countdown-display">3</span>
+		</div>
+
+		<div id="game-over-screen" class="overlay">
+			<p class="go-score">Score: <span id="final-score">0</span></p>
+
+			<div class="nickname-section">
+				<span>Nickname: </span>
+				<span id="go-nickname-display">NICKNAME</span>
+				<button id="regenerate-nickname" class="inline-btn">[regenerate]</button>
+			</div>
+
+			<button id="submit-score-button">Submit Score</button>
+			<p id="submit-status"></p>
+
+			<hr class="separator">
+
+			<h3>Top 10</h3>
+			<div id="leaderboard-display">
+				<ol id="leaderboard-list">
+					<li>Loading...</li>
+				</ol>
+			</div>
+
+			<button id="restart-button">Restart</button>
+		</div>
+
+		<div id="controls">
+			<button id="btn-up" class="control-btn">▲</button>
+			<button id="btn-left" class="control-btn">◀</button>
+			<button id="btn-down" class="control-btn">▼</button>
+			<button id="btn-right" class="control-btn">▶</button>
+		</div>
+	</div>
+
+	<script src="script.js"></script>
+</body>
+
+</html>

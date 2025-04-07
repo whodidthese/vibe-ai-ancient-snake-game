@@ -1,0 +1,584 @@
+/* Basic Reset & Body Styles */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background-color: #d2b48c;
+	/* Tan / Parchment background */
+	font-family: 'Cinzel Decorative', serif;
+	/* Ancient-style font */
+	color: #5a3a22;
+	/* Dark brown text */
+	overflow: hidden;
+	/* Prevent scroll bars */
+	touch-action: manipulation;
+	/* Improve touch responsiveness */
+}
+
+/* Desktop Orientation Blocker */
+#desktop-blocker {
+	display: none;
+	/* Hidden by default */
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(80, 50, 30, 0.9);
+	/* Dark overlay */
+	color: #f5eeda;
+	/* Light text */
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: 1.5em;
+	z-index: 100;
+	padding: 20px;
+}
+
+/* Game Container - Vertical Focus */
+#game-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	max-width: 400px;
+	/* Max width for vertical layout */
+	min-width: 300px;
+	/* Minimum sensible width */
+	padding: 15px;
+	background-color: #f5eeda;
+	/* Lighter Parchment */
+	border: 5px solid #8b4513;
+	/* Saddle brown border */
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+	border-radius: 5px;
+	position: relative;
+	/* For game over screen positioning */
+}
+
+/* Info Bar (Score, High Score) */
+#info-bar {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	padding: 5px 10px;
+	margin-bottom: 5px;
+	font-size: 1.1em;
+	font-weight: bold;
+	border-bottom: 2px solid #8b4513;
+}
+
+#nickname-display {
+	font-size: 0.9em;
+	margin-bottom: 10px;
+	color: #6b4a2f;
+	min-height: 1.2em;
+	/* Prevent layout shift while generating */
+}
+
+/* Game Canvas */
+#game-canvas {
+	background-color: #c19a6b;
+	/* Slightly darker canvas background */
+	border: 3px solid #5a3a22;
+	/* Darker border */
+	display: block;
+	/* Remove extra space below */
+	width: 100%;
+	/* Make canvas responsive within container */
+	aspect-ratio: 1 / 1.2;
+	/* Maintain a vertical aspect ratio */
+	max-height: 450px;
+	/* Limit height */
+}
+
+/* Touch Controls */
+#controls {
+	display: grid;
+	grid-template-areas:
+		". up ."
+		"left down right";
+	gap: 10px;
+	margin-top: 15px;
+	width: 70%;
+	max-width: 250px;
+	/* Limit control size */
+}
+
+.control-btn {
+	padding: 15px;
+	font-size: 1.5em;
+	font-weight: bold;
+	/* Make symbols thicker */
+	background-color: #a0522d;
+	/* Sienna */
+	color: #f5eeda;
+	/* Light text */
+	border: 2px solid #5a3a22;
+	border-radius: 8px;
+	cursor: pointer;
+	user-select: none;
+	/* Prevent text selection on double tap */
+	transition: background-color 0.2s;
+}
+
+.control-btn:active {
+	background-color: #8b4513;
+	/* Darker when pressed */
+}
+
+#btn-up {
+	grid-area: up;
+}
+
+#btn-left {
+	grid-area: left;
+}
+
+#btn-down {
+	grid-area: down;
+}
+
+#btn-right {
+	grid-area: right;
+}
+
+/* Game Over Screen */
+#game-over-screen {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(245, 238, 218, 0.9);
+	/* Semi-transparent light overlay */
+	display: none;
+	/* Hidden by default */
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	color: #5a3a22;
+	padding: 20px;
+	border-radius: 5px;
+	/* Match container */
+	z-index: 10;
+}
+
+#game-over-screen h2 {
+	font-size: 2em;
+	margin-bottom: 15px;
+	color: #8b0000;
+	/* Dark red */
+}
+
+#game-over-screen p {
+	font-size: 1.2em;
+	margin-bottom: 10px;
+}
+
+#restart-button {
+	padding: 12px 25px;
+	font-size: 1.2em;
+	font-family: 'Cinzel Decorative', serif;
+	background-color: #8b4513;
+	/* Saddle brown */
+	color: #f5eeda;
+	border: 2px solid #5a3a22;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 10px;
+	transition: background-color 0.2s;
+}
+
+#restart-button:hover {
+	background-color: #a0522d;
+	/* Sienna */
+}
+
+.leaderboard-info {
+	margin-top: 15px;
+	font-size: 0.8em !important;
+	/* Override p */
+	color: #6b4a2f;
+}
+
+/* === Overlay Base Styles === */
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(245, 238, 218, 0.95);
+	/* Semi-transparent light overlay */
+	display: none;
+	/* Hidden by default */
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	color: #5a3a22;
+	padding: 20px;
+	border-radius: 5px;
+	/* Match container */
+	z-index: 10;
+	/* Ensure overlays are on top */
+}
+
+/* === Start Screen Styling (Requirement 1) === */
+#start-screen {
+	/* Uses .overlay styles */
+	gap: 20px;
+	/* Space between title and button */
+}
+
+#start-screen h1 {
+	font-size: 2.2em;
+	color: #8b4513;
+	/* Saddle brown */
+}
+
+#start-button {
+	padding: 15px 30px;
+	font-size: 1.3em;
+	font-family: 'Cinzel Decorative', serif;
+	background-color: #a0522d;
+	/* Sienna */
+	color: #f5eeda;
+	border: 2px solid #5a3a22;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+#start-button:hover {
+	background-color: #8b4513;
+	/* Saddle brown */
+}
+
+
+/* === Countdown Overlay Styling (Requirement 1 & 1.1) === */
+#countdown-overlay {
+	/* Uses .overlay styles */
+	background-color: rgba(0, 0, 0, 0.6);
+	/* Darker for contrast */
+}
+
+#countdown-display {
+	font-size: 6em;
+	font-weight: bold;
+	color: #f5eeda;
+	/* Light text */
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* === Game Over Screen Specific Styling (Requirement 2) === */
+#game-over-screen {
+	/* Uses .overlay styles */
+	justify-content: space-around;
+	/* Distribute space */
+	gap: 8px;
+	/* Reduced gap */
+}
+
+.go-score {
+	font-size: 1.4em;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+/* Updated Nickname Section */
+.nickname-section {
+	display: flex;
+	align-items: center;
+	/* Vertically align items */
+	justify-content: center;
+	gap: 5px;
+	font-size: 1.1em;
+	margin-bottom: 10px;
+	width: 90%;
+	/* Limit width to prevent excessive stretching */
+	flex-wrap: nowrap;
+	/* Prevent wrapping */
+}
+
+/* Style for the "Nickname: " label */
+.nickname-section>span:first-child {
+	white-space: nowrap;
+	/* Prevent label from wrapping */
+	flex-shrink: 0;
+	/* Don't let label shrink */
+}
+
+/* Style for the actual nickname display span */
+#go-nickname-display {
+	flex-grow: 1;
+	/* Allow nickname to take available space */
+	overflow: hidden;
+	/* Hide overflow */
+	text-overflow: ellipsis;
+	/* Add ... for overflow */
+	white-space: nowrap;
+	/* Keep nickname on one line */
+	text-align: left;
+	/* Align nickname text to the left within its space */
+	margin: 0 5px;
+	/* Add some spacing around the nickname */
+	/* Optional: Add a max-width if needed, though flex-grow usually handles it */
+	/* max-width: 150px; */
+}
+
+.inline-btn {
+	background: none;
+	border: none;
+	color: #a0522d;
+	/* Sienna */
+	font-family: sans-serif;
+	/* Use a font likely to have the symbol */
+	font-size: 1.4em;
+	/* Make symbol larger */
+	cursor: pointer;
+	padding: 0;
+	/* Remove padding */
+	line-height: 1;
+	/* Adjust line height for vertical alignment */
+	flex-shrink: 0;
+	/* Don't let button shrink */
+}
+
+.inline-btn:hover:not(:disabled) {
+	color: #8b4513;
+	opacity: 0.8;
+	/* Slight visual feedback */
+}
+
+.inline-btn:disabled {
+	color: #999;
+	cursor: default;
+	opacity: 0.5;
+}
+
+#submit-score-button {
+	padding: 10px 20px;
+	font-size: 1.1em;
+	font-family: 'Cinzel Decorative', serif;
+	background-color: #228b22;
+	/* Forest Green */
+	color: #f5eeda;
+	border: 2px solid #1a671a;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	margin-bottom: 2px;
+	/* Space before status */
+}
+
+#submit-score-button:hover {
+	background-color: #1a671a;
+}
+
+#submit-score-button:disabled {
+	background-color: #888;
+	border-color: #666;
+	cursor: default;
+}
+
+#submit-status {
+	font-size: 0.9em;
+	min-height: 1.1em;
+	/* Prevent layout shift */
+	color: #1a671a;
+	/* Green for success */
+}
+
+#submit-status.error {
+	color: #a00;
+	/* Red for error */
+}
+
+.separator {
+	width: 80%;
+	border: none;
+	border-top: 1px solid #8b4513;
+	margin: 10px 0;
+}
+
+#leaderboard-display {
+	width: 90%;
+	max-height: 150px;
+	/* Limit height and allow scroll if needed */
+	overflow-y: auto;
+	border: 1px solid #8b4513;
+	padding: 5px;
+	background-color: #e8d7b7;
+	/* Slightly different background */
+	margin-bottom: 10px;
+	/* Space before restart */
+}
+
+#leaderboard-list {
+	list-style-position: inside;
+	padding-left: 5px;
+	font-size: 0.9em;
+	text-align: left;
+}
+
+#leaderboard-list li {
+	padding: 3px 0;
+	/* Adjust padding */
+	border-bottom: 1px dashed #c19a6b;
+	overflow: hidden;
+	/* Prevent content spillover */
+	white-space: nowrap;
+	/* Keep list item content on one line */
+	text-overflow: ellipsis;
+	/* Add ellipsis if list item content is too long */
+	line-height: 1.4;
+	/* Ensure spacing for symbols/text */
+}
+
+#leaderboard-list li:last-child {
+	border-bottom: none;
+}
+
+#leaderboard-list .rank {
+	display: inline-block;
+	width: 20px;
+	/* Ensure alignment */
+	font-weight: bold;
+}
+
+#leaderboard-list .nick {
+	/* margin-left: 5px; No longer needed if relying on <ol> numbering */
+	display: inline-block;
+	/* Allow ellipsis */
+	max-width: 50%;
+	/* Limit width to allow space for score/date */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	vertical-align: middle;
+	/* Align with number */
+}
+
+#leaderboard-list .score {
+	float: right;
+	/* Keep score/date aligned right */
+	margin-left: 10px;
+	vertical-align: middle;
+}
+
+#leaderboard-list .date {
+	float: right;
+	color: #666;
+	font-size: 0.9em;
+	margin-left: 5px;
+	vertical-align: middle;
+}
+
+#restart-button {
+	padding: 12px 25px;
+	font-size: 1.2em;
+	font-family: 'Cinzel Decorative', serif;
+	background-color: #8b4513;
+	/* Saddle brown */
+	color: #f5eeda;
+	border: 2px solid #5a3a22;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.2s, opacity 0.2s;
+	margin-top: 5px;
+}
+
+#restart-button:hover:not(:disabled) {
+	background-color: #a0522d;
+	/* Sienna */
+}
+
+/* Disabled state for buttons (Requirement 2.1.1) */
+#restart-button:disabled {
+	background-color: #aaa;
+	/* Gray */
+	border-color: #888;
+	color: #ddd;
+	cursor: default;
+	opacity: 0.7;
+}
+
+/* Ensure info bar has enough space for local high score */
+#info-bar {
+	/* Existing styles */
+	font-size: 1em;
+	/* Slightly smaller if needed */
+}
+
+/* Update High Score display name to Local High Score */
+/* (No specific CSS needed unless you want to style it differently from Score) */
+
+/* Optional: Style the Loading/Error state for leaderboard */
+#leaderboard-list .status-message {
+	text-align: center;
+	font-style: italic;
+	color: #777;
+}
+
+/* --- Responsive Adjustments & Desktop Blocker Logic --- */
+
+/* Apply desktop blocker on wider screens OR landscape orientation */
+@media (min-width: 600px),
+(orientation: landscape) {
+	/* Show blocker only if it's NOT a typical portrait mobile */
+	@media (min-aspect-ratio: 1/1) {
+
+		/* If width > height */
+		#desktop-blocker {
+			display: flex;
+			/* Show the blocker */
+		}
+
+		#game-container {
+			display: none;
+			/* Hide the game */
+		}
+	}
+
+	/* Ensure game container is still centered if aspect ratio is somehow vertical but wide */
+	body {
+		align-items: center;
+	}
+}
+
+/* On very narrow screens, reduce padding/fonts slightly */
+@media (max-width: 320px) {
+	#info-bar {
+		font-size: 1em;
+	}
+
+	.control-btn {
+		font-size: 1.3em;
+		padding: 12px;
+	}
+
+	#game-over-screen h2 {
+		font-size: 1.8em;
+	}
+
+	#game-over-screen p {
+		font-size: 1.1em;
+	}
+
+	#restart-button {
+		font-size: 1.1em;
+		padding: 10px 20px;
+	}
+}

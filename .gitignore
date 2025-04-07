@@ -1,0 +1,23 @@
+# Node JS
+node_modules/
+dist/
+
+# Logs
+logs
+*.log
+*-debug.log*
+*-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.cursor/
+
+# Security
+.env
+
+# This Server
+leaderboard.db
